@@ -4,9 +4,9 @@ LineageOS-20:
   clang:
     - git clone --depth=1 https://gitlab.com/Jprimero15/lolz_clang.git -b main
   config:
-    - make O=out ARCH=arm64 k65v1_64_bsp_defconfig_PD2036F_EX
+    - echo "Skip separate config step"
   build:
-    - PATH="${PWD}/../clang/bin:${PATH}" make -j$(nproc --all) O=out ARCH=arm64 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE="${PWD}/../clang/bin/aarch64-linux-gnu-" CROSS_COMPILE_ARM32="${PWD}/../clang/bin/arm-linux-gnueabi-" LLVM=1 LLVM_IAS=1 LD=ld.lld AR=llvm-ar NM=llvm-nm AS=llvm-as OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip
+    - mkdir -p out && PATH="${PWD}/../clang/bin:${PATH}" make O=out ARCH=arm64 k65v1_64_bsp_defconfig_PD2036F_EX && PATH="${PWD}/../clang/bin:${PATH}" make -j$(nproc --all) O=out ARCH=arm64 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE="${PWD}/../clang/bin/aarch64-linux-gnu-" CROSS_COMPILE_ARM32="${PWD}/../clang/bin/arm-linux-gnueabi-" LLVM=1 LLVM_IAS=1 LD=ld.lld AR=llvm-ar NM=llvm-nm AS=llvm-as OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip
   anykernel:
     - nashc
   kernelSU:
