@@ -54,6 +54,7 @@ jobs:
         
       - name: Compile kernel
         run: |
+          cd kernel
           chmod +x build.sh
           ./build.sh
 
