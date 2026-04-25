@@ -6,7 +6,8 @@ LineageOS-20:
   config:
     - echo "Checking defconfig..."
   build:
-    - if [ -f "arch/arm64/configs/k65v1_64_bsp_defconfig_PD2036F_EX" ]; then echo "Defconfig found!"; else echo "Defconfig NOT found!"; ls arch/arm64/configs/; exit 1; fi && PATH="${PWD}/../clang/bin:${PATH}" make ARCH=arm64 k65v1_64_bsp_defconfig_PD2036F_EX && mkdir -p out && cp .config out/ && PATH="${PWD}/../clang/bin:${PATH}" make -j$(nproc --all) O=out ARCH=arm64 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE="${PWD}/../clang/bin/aarch64-linux-gnu-" CROSS_COMPILE_ARM32="${PWD}/../clang/bin/arm-linux-gnueabi-" LLVM=1 LLVM_IAS=1 LD=ld.lld AR=llvm-ar NM=llvm-nm AS=llvm-as OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip
+    - PATH="${PWD}/../clang/bin:${PATH}" make O=out ARCH=arm64 k65v1_64_bsp_defconfig_PD2036F_EX && PATH="${PWD}/../clang/bin:${PATH}" make -j$(nproc --all) O=out ARCH=arm64 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE="${PWD}/../clang/bin/aarch64-linux-gnu-" CROSS_COMPILE_ARM32="${PWD}/../clang/bin/arm-linux-gnueabi-" LLVM=1 LLVM_IAS=1 LD=ld.lld AR=llvm-ar NM=llvm-nm AS=llvm-as OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip
+  anykernel:  
     - nashc
   kernelSU:
     - stable-pin
